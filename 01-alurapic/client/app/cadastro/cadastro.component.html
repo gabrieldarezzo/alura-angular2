@@ -1,0 +1,68 @@
+
+<div class="container">
+    <h1>Cadastro de Fotos</h1>
+
+    <form [formGroup]="meuForm" (submit)="cadastrar($event)" class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                
+                <label>Título</label>
+                <input 
+                    [(ngModel)]="foto.titulo" 
+                    formControlName="titulo" 
+                    class="form-control"  autocomplete="off">
+                
+                <div *ngIf="meuForm.controls.titulo.invalid">
+                    
+                    <span *ngIf="meuForm.controls.titulo.errors.required" class="form-control alert-danger">
+                        Titulo obrigatório
+                    </span>
+
+                    <span *ngIf="meuForm.controls.titulo.errors.minlength" class="form-control alert-danger">
+                        Titulo deve ter ao menos 4
+                    </span>
+
+                </div>
+                
+
+            </div>
+            
+            <div class="form-group">
+                <label>URL</label>
+                <input 
+                    [(ngModel)]="foto.url"   
+                    formControlName="url"
+                    class="form-control" autocomplete="off">
+                <span *ngIf="meuForm.controls.url.invalid" class="form-control alert-danger">
+                    Url obrigatório
+                </span>
+            </div>
+            
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea 
+                    [(ngModel)]="foto.descricao"
+                    formControlName="descricao"
+                    class="form-control" autocomplete="off">
+                </textarea>
+                <span *ngIf="meuForm.controls.descricao.invalid" class="form-control alert-danger">
+                    Descrição obrigatório
+                </span>
+
+            </div>
+
+            <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+
+            <button type="submit" class="btn btn-primary" [disabled]="meuForm.invalid">
+                Salvar
+            </button>
+
+            <hr>
+        </div>
+
+        <div class="col-md-6">
+            <h1 class="text-center">{{foto.titulo}}</h1>
+            <foto url="{{foto.url}}" titulo="{{foto.titulo}}" ></foto>
+        </div>
+    </form>
+</div>
